@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import {
   View,
   TextInput,
@@ -10,13 +10,26 @@ import {
   Text,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { BackHandler } from "react-native";
 import GlobalStyle from "../../GlobalStyles/GlobalStyle";
-import { useNavigation } from "@react-navigation/native";
 import InsetShadow from "react-native-inset-shadow";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 const MenuScreen = () => {
+  useEffect(() => {
+    const backAction = () => {
+      console.log("pressed back");
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  });
+
   SplashScreen.preventAutoHideAsync();
 
   const [fontsLoaded] = useFonts({
@@ -33,7 +46,10 @@ const MenuScreen = () => {
     return <View style={{ backgroundColor: "blue" }}></View>;
   }
   return (
-    <View style={[GlobalStyle.backgroundOfPages, { overflow: "scroll" }]}>
+    <View
+      style={[GlobalStyle.backgroundOfPages, { overflow: "scroll" }]}
+      onLayout={onLayoutRootView}
+    >
       <SafeAreaView style={[GlobalStyle.safeView, { flex: 1 }]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View

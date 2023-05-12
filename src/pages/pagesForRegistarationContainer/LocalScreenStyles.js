@@ -47,10 +47,10 @@ export default StyleSheet.create({
     color: "#656565",
   },
   textUnderInput: {
-    color: "#723fc6",
     fontWeight: 600,
     alignSelf: "center",
     position: "relative",
+    color: "#723fc6",
   },
   settupButton: {
     position: "relative",

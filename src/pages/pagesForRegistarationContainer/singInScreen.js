@@ -19,24 +19,53 @@ const SingInScreen = ({}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [isBadEmailTextVisible, setBadEmailTextVisible] = useState(false);
+  const [textColorOfUnderPassword, setTextColorOfUnderPassword] =
+    useState("#723fc6");
+
   const handleRegistration = () => {
-    fetch("http://example.com/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password, email }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Реєстрація успішна");
-        } else {
-          console.log("неправильна адресса");
-        }
+    let everythingRight = true;
+    let emailPattern = /[a-z0-9]+@gmail\.com/i;
+    if (!emailPattern.test(email)) {
+      setBadEmailTextVisible(true);
+      everythingRight = false;
+    } else {
+      setBadEmailTextVisible(false);
+    }
+    if (password.length < 9) {
+      setTextColorOfUnderPassword("#e10000");
+      sizeOfText = 10;
+      everythingRight = false;
+    } else {
+      setTextColorOfUnderPassword("#723fc6");
+    }
+    if (everythingRight) {
+      fetch("https://example.com", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
       })
-      .catch((error) => {
-        console.error("Помилка при відправленні даних", error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Network response was not ok");
+          }
+        })
+        .then((data) => {
+          if (data.success) {
+            console.log("Registration successful");
+            navigation.navigate("menuScreenContainer");
+            setBadEmailTextVisible(false);
+          } else {
+            console.log("Registration failed");
+            setBadEmailTextVisible(true);
+          }
+        })
+        .catch((error) => {
+          console.error("Error occurred:", error);
+          throw error;
+        });
+    }
   };
 
   return (
@@ -109,6 +138,34 @@ const SingInScreen = ({}) => {
               value={email}
               onChangeText={(text) => setEmail(text)}
             />
+            {isBadEmailTextVisible && (
+              <View
+                style={{
+                  position: "absolute",
+                  height: 16,
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  alignSelf: "center",
+                  top: 50,
+                  left: 40,
+                }}
+              >
+                <Image
+                  source={require("../../../images/alarmIcon.png")}
+                  style={{
+                    width: 10,
+                    height: 10,
+                    position: "relative",
+                    top: 3,
+                    marginRight: 20,
+                    left: 10,
+                  }}
+                />
+                <Text style={[styles.badPasswordText]}>
+                  Неправильно введена ел.пошта
+                </Text>
+              </View>
+            )}
           </View>
           <View
             style={[
@@ -138,9 +195,15 @@ const SingInScreen = ({}) => {
             />
           </View>
           <Text
+            key={textColorOfUnderPassword}
             style={[
               LocalScreenStyles.textUnderInput,
-              { right: 40, marginTop: 100, fontSize: 14 },
+              {
+                right: 40,
+                marginTop: 100,
+                fontSize: 14,
+                color: textColorOfUnderPassword,
+              },
             ]}
           >
             Не менше 9 символів
@@ -181,6 +244,11 @@ const styles = StyleSheet.create({
   shadow: {
     borderRadius: 200,
     flex: 1,
+  },
+  badPasswordText: {
+    fontSize: 12,
+    fontWeight: 600,
+    color: "#e10000",
   },
 });
 
