@@ -1,9 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import RegistrationScreen from "../pages/pagesForRegistarationContainer/registrationScreen";
+import RegistrationScreen from "../pages/pagesForRegistarationContainer/Screen/registrationScreen";
 import React from "react";
-import SingInScreen from "../pages/pagesForRegistarationContainer/singInScreen";
-import LogInScreen from "../pages/pagesForRegistarationContainer/logInScreen";
-import ForogotPasswordScreen from "../pages/pagesForRegistarationContainer/forgotPasswordScreen";
+import SingInScreen from "../pages/pagesForRegistarationContainer/Screen/singInScreen";
+import LogInScreen from "../pages/pagesForRegistarationContainer/Screen/logInScreen";
+import ForogotPasswordScreen from "../pages/pagesForRegistarationContainer/Screen/forgotPasswordScreen";
 const Stack = createStackNavigator();
 
 const RegistrationScreenContainer = ({ navigation }) => {
