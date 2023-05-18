@@ -137,15 +137,15 @@ const LogInScreen = () => {
               <Image
                 source={require("../../../../images/alarmIcon.png")}
                 style={{
-                  width: 10,
+                  width: 11,
                   height: 10,
                   position: "relative",
-                  top: 3,
+                  top: 1,
                   marginRight: 20,
                   left: 10,
                 }}
               />
-              <Text style={styles.badPasswordText}>
+              <Text style={GlobalStyle.badPasswordText}>
                 Неправильний пароль або ел.пошта
               </Text>
             </View>
@@ -190,11 +190,6 @@ const LogInScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  badPasswordText: {
-    fontSize: 12,
-    fontWeight: 600,
-    color: "#e10000",
-  },
   shadow: {
     borderRadius: 200,
     flex: 1,

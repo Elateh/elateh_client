@@ -76,4 +76,16 @@ export default StyleSheet.create({
     position: "relative",
     color: "#723fc6",
   },
+  goBackArrow: {
+    marginTop: 80,
+    width: 30,
+    alignSelf: "center",
+    justifyContent: "center",
+    transform: [{ rotate: "180deg" }],
+  },
+  badPasswordText: {
+    fontSize: 12,
+    fontWeight: 600,
+    color: "#e10000",
+  },
 });

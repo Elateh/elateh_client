@@ -20,6 +20,10 @@ const SingInScreen = ({}) => {
   const [password, setPassword] = useState("");
 
   const [isBadEmailTextVisible, setBadEmailTextVisible] = useState(false);
+  const [isBadUserNameImageVisible, setBadEmailImageVisible] = useState(false);
+  const [isBadPasswordImageVisible, setBadPasswordImageVisible] =
+    useState(false);
+
   const [textColorOfUnderPassword, setTextColorOfUnderPassword] =
     useState("#723fc6");
   const [textColorOfUnderUser, setTextColorOfUnderUser] = useState("#723fc6");
@@ -27,11 +31,11 @@ const SingInScreen = ({}) => {
   const handleRegistration = () => {
     let everythingRight = true;
     let emailPattern = /[a-z0-9]+@gmail\.com/i;
-    if (username.length < 3) {
+    if (username.length < 1) {
       everythingRight = false;
-      setTextColorOfUnderUser("#e10000");
+      setBadEmailImageVisible(true);
     } else {
-      setTextColorOfUnderUser("#723fc6");
+      setBadEmailImageVisible(false);
     }
     if (!emailPattern.test(email)) {
       setBadEmailTextVisible(true);
@@ -41,9 +45,11 @@ const SingInScreen = ({}) => {
     }
     if (password.length < 9) {
       setTextColorOfUnderPassword("#e10000");
+      setBadPasswordImageVisible(true);
       everythingRight = false;
     } else {
       setTextColorOfUnderPassword("#723fc6");
+      setBadPasswordImageVisible(false);
     }
     if (everythingRight) {
       fetch("https://example.com", {
@@ -118,25 +124,40 @@ const SingInScreen = ({}) => {
               value={username}
               onChangeText={(text) => setUsername(text)}
             />
+            {isBadUserNameImageVisible && (
+              <View
+                style={{
+                  position: "absolute",
+                  height: 16,
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  alignSelf: "center",
+                  top: 50,
+                  left: 40,
+                }}
+              >
+                <Image
+                  source={require("../../../../images/alarmIcon.png")}
+                  style={{
+                    width: 12,
+                    height: 10,
+                    position: "relative",
+                    top: 1,
+                    marginRight: 20,
+                    left: 10,
+                  }}
+                />
+                <Text style={[GlobalStyle.badPasswordText]}>
+                  Не менше 1 символа
+                </Text>
+              </View>
+            )}
           </View>
-          <Text
-            style={[
-              GlobalStyle.textUnderInput,
-              {
-                right: 40,
-                top: 100,
-                fontSize: 14,
-                color: textColorOfUnderUser,
-              },
-            ]}
-          >
-            Не менше 3 символів
-          </Text>
           <View
             style={[
               GlobalStyle.blockOfTextInput,
               {
-                marginTop: "1.5%",
+                marginTop: "4%",
               },
             ]}
           >
@@ -172,15 +193,15 @@ const SingInScreen = ({}) => {
                 <Image
                   source={require("../../../../images/alarmIcon.png")}
                   style={{
-                    width: 10,
+                    width: 12,
                     height: 10,
                     position: "relative",
-                    top: 3,
+                    top: 1,
                     marginRight: 20,
                     left: 10,
                   }}
                 />
-                <Text style={[styles.badPasswordText]}>
+                <Text style={[GlobalStyle.badPasswordText]}>
                   Неправильно введена ел.пошта
                 </Text>
               </View>
@@ -212,23 +233,45 @@ const SingInScreen = ({}) => {
               secureTextEntry
               onChangeText={(text) => setPassword(text)}
             />
+            <View
+              style={{
+                position: "absolute",
+                justifyContent: "center",
+                flexDirection: "row",
+                alignSelf: "center",
+                top: 50,
+                left: 50,
+              }}
+            >
+              {isBadPasswordImageVisible && (
+                <Image
+                  source={require("../../../../images/alarmIcon.png")}
+                  style={{
+                    width: 12,
+                    height: 10,
+                    position: "relative",
+                    top: 1,
+                    marginRight: 10,
+                  }}
+                />
+              )}
+              <Text
+                style={[
+                  GlobalStyle.badPasswordText,
+                  {
+                    right: "auto",
+                    marginRight: 10,
+                    height: 14,
+                    color: textColorOfUnderPassword,
+                  },
+                ]}
+              >
+                Не менше 9 символів
+              </Text>
+            </View>
           </View>
-          <Text
-            key={textColorOfUnderPassword}
-            style={[
-              GlobalStyle.textUnderInput,
-              {
-                right: 40,
-                marginTop: 100,
-                fontSize: 14,
-                color: textColorOfUnderPassword,
-              },
-            ]}
-          >
-            Не менше 9 символів
-          </Text>
           <TouchableOpacity
-            style={[GlobalStyle.settupButton, { width: 230 }]}
+            style={[GlobalStyle.settupButton, { width: 230, top: "35%" }]}
             onPress={handleRegistration}
           >
             <Text style={GlobalStyle.textInSettupButton}>Зареєструватися</Text>
@@ -261,11 +304,6 @@ const styles = StyleSheet.create({
   shadow: {
     borderRadius: 200,
     flex: 1,
-  },
-  badPasswordText: {
-    fontSize: 12,
-    fontWeight: 600,
-    color: "#e10000",
   },
 });
 

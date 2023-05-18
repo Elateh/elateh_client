@@ -77,8 +77,10 @@ const RegistrationScreen = () => {
         ]}
       >
         <View style={styles.mainCircle}>
-          <Text style={styles.textInMainCircle}>Ela.locker</Text>
-          <Text style={styles.shadowTextInMainCircle}>Ela.locker</Text>
+          <View style={{ top: 40 }}>
+            <Text style={styles.textInMainCircle}>Ela.locker</Text>
+            <Text style={styles.shadowTextInMainCircle}>Ela.locker</Text>
+          </View>
         </View>
         <TouchableOpacity
           style={styles.buttonInMainiCircle}
@@ -122,7 +124,6 @@ const styles = StyleSheet.create({
     fontSize: 70,
     fontFamily: "Pacifico-Regular",
     alignSelf: "center",
-    top: 40,
     color: "#ebdeff",
     zIndex: 2,
   },
@@ -130,7 +131,8 @@ const styles = StyleSheet.create({
     fontSize: 70,
     fontFamily: "Pacifico-Regular",
     alignSelf: "center",
-    top: -65,
+    position: "absolute",
+    top: 6,
     color: "#000",
     zIndex: 1,
   },
