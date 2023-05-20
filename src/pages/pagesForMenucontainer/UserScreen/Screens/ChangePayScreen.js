@@ -21,9 +21,9 @@ const ChangePayScreen = () => {
             GlobalStyle.circle,
             {
               top: "50%",
-              height: 373,
+              height: 384,
               width: 392,
-              transform: [{ translateY: -186 }],
+              transform: [{ translateY: -192 }],
             },
           ]}
         >
@@ -31,15 +31,24 @@ const ChangePayScreen = () => {
             Способи оплати
           </Text>
           <View style={styles.savedCart}>
-            <Text>Збережені способи оплати</Text>
+            <Text style={styles.textInSavedCart}>Збережені способи оплати</Text>
           </View>
           <View style={styles.addNewCart}>
-            <Image />
-            <Text>Додати нову картку</Text>
-            <TouchableOpacity>
+            <Image
+              source={require("../../../../../images/payCardIcon.png")}
+              style={{ width: 40, height: 32 }}
+            />
+            <Text style={styles.textInNewCart}>Додати нову картку</Text>
+            <TouchableOpacity
+              style={{
+                alignSelf: "center",
+                top: 2,
+                marginRight: 10,
+                marginLeft: "auto",
+              }}
+            >
               <Image
                 source={require("../../../../../images/downArrowIcon.png")}
-                style={{ alignSelf: "center", right: 20 }}
               />
             </TouchableOpacity>
           </View>
@@ -57,24 +66,25 @@ const ChangePayScreen = () => {
 
 const styles = StyleSheet.create({
   savedCart: {
-    borderWidth: 1,
-    borderColor: "red",
     marginTop: "30%",
     alignSelf: "center",
+    width: 270,
   },
   textInSavedCart: {
-    fontWeight: 200,
+    color: "#4d4d4d",
     fontSize: 20,
   },
   addNewCart: {
-    borderWidth: 1,
-    borderColor: "blue",
     marginTop: 20,
     alignSelf: "center",
     flexDirection: "row",
+    width: 270,
   },
   textInNewCart: {
-    fontSize: 18,
+    fontSize: 16,
+    fontWeight: 600,
+    alignSelf: "center",
+    marginLeft: 10,
   },
 });
 

@@ -11,6 +11,7 @@ import {
 import GlobalStyle from "../../../GlobalStyles/GlobalStyle";
 import LocalScreenStyles from "../styles/LocalScreenStyles";
 import { useNavigation } from "@react-navigation/native";
+import setUserData from "../../../model/setUserData";
 
 const SingInScreen = ({}) => {
   const navigation = useNavigation();
@@ -26,11 +27,10 @@ const SingInScreen = ({}) => {
 
   const [textColorOfUnderPassword, setTextColorOfUnderPassword] =
     useState("#723fc6");
-  const [textColorOfUnderUser, setTextColorOfUnderUser] = useState("#723fc6");
 
   const handleRegistration = () => {
     let everythingRight = true;
-    let emailPattern = /[a-z0-9]+@gmail\.com/i;
+    const emailPattern = /[a-z0-9]+@gmail\.com/i;
     if (username.length < 1) {
       everythingRight = false;
       setBadEmailImageVisible(true);
@@ -52,9 +52,10 @@ const SingInScreen = ({}) => {
       setBadPasswordImageVisible(false);
     }
     if (everythingRight) {
+      setUserData(username, email, password);
       fetch("https://example.com", {
         method: "POST",
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, username }),
       })
         .then((response) => {
           if (response.ok) {

@@ -25,7 +25,7 @@ const MenuScreen = () => {
 
   useEffect(() => {
     const backAction = () => {
-      return false;
+      return true;
     };
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
