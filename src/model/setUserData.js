@@ -8,15 +8,13 @@ const setUserData = async (username, email, password) => {
       password,
     };
 
-    // Сериализуем данные в формат JSON
     const userDataJson = JSON.stringify(userData);
 
-    // Сохраняем данные в AsyncStorage
     await AsyncStorage.setItem("userData", userDataJson);
 
-    console.log("Данные пользователя успешно сохранены.");
+    console.log("Дані користувача успішно збережені.");
   } catch (error) {
-    console.log("Ошибка при сохранении данных пользователя:", error);
+    console.log("Помилка збереження даних користувача:", error);
   }
 };
 export default setUserData;
