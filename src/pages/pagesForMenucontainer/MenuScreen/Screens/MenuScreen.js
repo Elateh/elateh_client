@@ -68,15 +68,17 @@ const MenuScreen = () => {
             <RightSideOfMenuBlock
               text={"Суші"}
               imageSource={require("../../../../../images/SushiImage.png")}
+              whereToNavigate={"sushiMenuScreenContainer"}
             />
             <LeftSideOfMenuBlock
               text={"Перші страви"}
               imageSource={require("../../../../../images/SoupImage.png")}
-              whereToNavigate={"pizaMenuScreenContainer"}
+              whereToNavigate={"firstDishesScreenContainer"}
             />
             <RightSideOfMenuBlock
               text={"Другі страви"}
               imageSource={require("../../../../../images/MeatInage.png")}
+              whereToNavigate={"secondDishesMenuScreenContainer"}
             />
             <LeftSideOfMenuBlock
               text={"Фастфуд"}
@@ -86,6 +88,7 @@ const MenuScreen = () => {
             <RightSideOfMenuBlock
               text={"Випічка"}
               imageSource={require("../../../../../images/BackeryImage.png")}
+              whereToNavigate={"pizaMenuScreenContainer"}
             />
             <LeftSideOfMenuBlock
               text={"Напої"}
@@ -95,6 +98,7 @@ const MenuScreen = () => {
             <RightSideOfMenuBlock
               text={"Ласощі"}
               imageSource={require("../../../../../images/CandiesImage.png")}
+              whereToNavigate={"pizaMenuScreenContainer"}
             />
             <View style={{ height: 90 }}></View>
           </View>

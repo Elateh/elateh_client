@@ -17,7 +17,9 @@ const TextBlock = ({ imageSource, text, haveNavigation, whereNavigate }) => {
           style={styles.navigationButton}
           onPress={() => navigation.navigate(whereNavigate)}
         >
-          <Image source={require("../../../../../images/downArrowIcon.png")} />
+          <Image
+            source={require("../../../../../images/downArrowIconBlack.png")}
+          />
         </TouchableOpacity>
       )}
     </View>

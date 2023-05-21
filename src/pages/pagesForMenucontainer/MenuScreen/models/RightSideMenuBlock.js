@@ -1,24 +1,15 @@
 import React from "react";
-import {
-  View,
-  TouchableOpacity,
-  Image,
-  Text,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { View, TouchableOpacity, Image, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-const RightSideOfMenuBlock = ({ imageSource, text }) => {
-  const screenWidth = Dimensions.get("window").width;
-  const screenHeight = Dimensions.get("window").height;
-
-  const scaleFont = (fontSize) => {
-    const ratio = fontSize / 375; // Рассчитываем коэффициент масштабирования
-    const newSize = Math.round(ratio * screenWidth);
-    return newSize;
-  };
+import { useNavigation } from "@react-navigation/native";
+const RightSideOfMenuBlock = ({ imageSource, text, whereToNavigate }) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.menuBlocks} activeOpacity={0.4}>
+    <TouchableOpacity
+      style={styles.menuBlocks}
+      activeOpacity={0.4}
+      onPress={() => navigation.navigate(whereToNavigate)}
+    >
       <View style={styles.blockInMenuBlock}>
         <LinearGradient
           colors={["#fff", "rgba(0,0,0,0)"]}

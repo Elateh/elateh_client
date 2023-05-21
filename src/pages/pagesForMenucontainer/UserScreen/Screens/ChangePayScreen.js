@@ -48,7 +48,7 @@ const ChangePayScreen = () => {
               }}
             >
               <Image
-                source={require("../../../../../images/downArrowIcon.png")}
+                source={require("../../../../../images/downArrowIconBlack.png")}
               />
             </TouchableOpacity>
           </View>
@@ -57,7 +57,9 @@ const ChangePayScreen = () => {
           style={[GlobalStyle.goBackArrow, { top: 100 }]}
           onPress={() => navigation.navigate("userScreen")}
         >
-          <Image source={require("../../../../../images/downArrowIcon.png")} />
+          <Image
+            source={require("../../../../../images/downArrowIconBlack.png")}
+          />
         </TouchableOpacity>
       </SafeAreaView>
     </View>

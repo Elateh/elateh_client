@@ -11,6 +11,7 @@ import {
 import GlobalStyle from "../../../GlobalStyles/GlobalStyle";
 import LocalScreenStyles from "../styles/LocalScreenStyles";
 import { useNavigation } from "@react-navigation/native";
+import setUserData from "../../../model/setUserData";
 
 const LogInScreen = () => {
   const navigation = useNavigation();
@@ -37,8 +38,9 @@ const LogInScreen = () => {
           }
         })
         .then((data) => {
-          if (data.success) {
+          if (data != null) {
             console.log("Registration successful");
+            setUserData(data.username, data.email, data.password);
             navigation.navigate("menuScreenContainer");
             setBadPasswordTextVisible(false);
           } else {

@@ -6,36 +6,22 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
+import getUserData from "../../../../model/getUserData";
 import GlobalStyle from "../../../../GlobalStyles/GlobalStyle";
 import { useNavigation } from "@react-navigation/native";
 import TextBlock from "../models/TextBlocks";
 
 const UserScreen = () => {
-  const [username, setUsername] = useState("Ваше Ім'я та Прізвище");
-  const [email, setEmail] = useState("Ваш Email");
-
+  const [username, setUsername] = useState("Ім'я та Прізвище");
+  const [email, setEmail] = useState("Електронна пошта");
   const navigation = useNavigation();
 
-  fetch("https://example.com", {
-    method: "GET",
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Error: " + response.status);
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      setUsername(data.username);
-      setEmail(data.email);
-    })
-    .catch((error) => {
-      console.error("Error occurred:", error);
-      throw error;
-    });
-
+  getUserData().then((userData) => {
+    if (userData != null) {
+      setUsername(userData.username);
+      setEmail(userData.email);
+    }
+  });
   return (
     <View style={GlobalStyle.backgroundOfPages}>
       <SafeAreaView style={GlobalStyle.safeView}>
@@ -77,7 +63,9 @@ const UserScreen = () => {
           style={GlobalStyle.goBackArrow}
           onPress={() => navigation.navigate("menuScreen")}
         >
-          <Image source={require("../../../../../images/downArrowIcon.png")} />
+          <Image
+            source={require("../../../../../images/downArrowIconBlack.png")}
+          />
         </TouchableOpacity>
       </SafeAreaView>
     </View>

@@ -123,7 +123,9 @@ const ChangeTelephoneNumberScreen = () => {
           style={GlobalStyle.goBackArrow}
           onPress={() => navigation.navigate("userScreen")}
         >
-          <Image source={require("../../../../../images/downArrowIcon.png")} />
+          <Image
+            source={require("../../../../../images/downArrowIconBlack.png")}
+          />
         </TouchableOpacity>
       </SafeAreaView>
     </View>

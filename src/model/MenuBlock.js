@@ -7,6 +7,9 @@ const BlockPizeria = ({
   imageSource,
   whereToNavigate = "menuScreen",
   pizeriaName = "піца",
+  imageUnderImageSource,
+  styleImageUnderImage,
+  typeOfMenu,
 }) => {
   const navigation = useNavigation();
 
@@ -21,7 +24,7 @@ const BlockPizeria = ({
           style={styles.navigationIcon}
           onPress={() => navigation.navigate(whereToNavigate)}
         >
-          <Image source={require("../images/downArrowIcon.png")} />
+          <Image source={require("../../images/downArrowIconLight.png")} />
         </TouchableOpacity>
         <LinearGradient
           colors={["rgba(0,0,0,0)", "rgba(0,0,0,0.6)"]}
@@ -31,10 +34,7 @@ const BlockPizeria = ({
         ></LinearGradient>
       </View>
       <View style={styles.underImageBlock}>
-        <Image
-          source={require("../images/downRingImage.png")}
-          style={{ alignSelf: "center", top: -25 }}
-        />
+        <Image source={imageUnderImageSource} style={styleImageUnderImage} />
         <View
           style={{
             position: "absolute",
@@ -42,8 +42,8 @@ const BlockPizeria = ({
             width: 100,
           }}
         >
-          <Text style={styles.textUnunderImageBlock}>Піцерія</Text>
-          <Text style={styles.textUnunderImageBlock}>"{pizeriaName}"</Text>
+          <Text style={styles.textUnunderImageBlock}>{typeOfMenu}</Text>
+          <Text style={styles.textUnunderImageBlock}>{pizeriaName}</Text>
         </View>
       </View>
     </View>
@@ -53,7 +53,8 @@ const BlockPizeria = ({
 const styles = StyleSheet.create({
   blockPizeria: {
     alignSelf: "center",
-    marginTop: 10,
+    marginTop: 60,
+    top: -30,
     height: 270,
     width: "90%",
   },
@@ -71,15 +72,15 @@ const styles = StyleSheet.create({
     zIndex: 2,
     height: 165,
     position: "absolute",
-    borderTopRightRadius: 56,
-    borderBottomRightRadius: 60,
-    width: "98.7%",
+    borderTopRightRadius: 60,
+    borderBottomRightRadius: 65,
+    width: "99.4%",
   },
   navigationIcon: {
     position: "absolute",
     alignSelf: "flex-end",
     top: 68,
-    zIndex: 3,
+    zIndex: 4,
     right: 10,
   },
 });

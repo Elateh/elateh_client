@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import GlobalStyle from "../../../../GlobalStyles/GlobalStyle";
 import { useNavigation } from "@react-navigation/native";
-import removeUserData from "../../../../model/removeUserData";
+import removeUserData from "../../../../model/RemoveUserData";
 
 const ConfidentialScreen = () => {
   const navigation = useNavigation();
@@ -42,7 +42,9 @@ const ConfidentialScreen = () => {
           style={GlobalStyle.goBackArrow}
           onPress={() => navigation.navigate("userScreen")}
         >
-          <Image source={require("../../../../../images/downArrowIcon.png")} />
+          <Image
+            source={require("../../../../../images/downArrowIconBlack.png")}
+          />
         </TouchableOpacity>
       </SafeAreaView>
     </View>

@@ -11,36 +11,45 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-import GlobalStyle from "../../../../GlobalStyles/GlobalStyle";
-import LocalStyle from "../../styles/LocalStyle";
-import BottomMenu from "../../models/BottomMenu";
-import SearchInput from "../../models/SearchInput";
-import BlockPizeria from "../models/PizeriaBlock";
+import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
+import LocalStyle from "../../../styles/LocalStyle";
+import BottomMenu from "../../../models/BottomMenu";
+import SearchInput from "../../../models/SearchInput";
+import MenuBlock from "../../../../../model/MenuBlock";
 
 const PizaMenuScreen = () => {
   const [fontsLoaded] = useFonts({
-    "MarckScript-Regular": require("../../../../../assets/fonts/MarckScript-Regular.ttf"),
+    "MarckScript-Regular": require("../../../../../../assets/fonts/MarckScript-Regular.ttf"),
   });
   const [arrayOfPizerias, setArrayOfPizerias] = useState([
     {
-      pizeriaName: "Лополь1",
+      pizeriaName: "Леополі",
       imageSource: require("../images/1PizeriaImage.png"),
+      imageUnderImageSource: require("../images/downRingImage.png"),
+      styleimageUnderImage: {
+        alignSelf: "center",
+        top: -25,
+      },
     },
     {
-      pizeriaName: "Лополь2",
+      pizeriaName: "Domino’s",
       imageSource: require("../images/2PizeriaImage.png"),
+      imageUnderImageSource: require("../images/downRingImage.png"),
     },
     {
-      pizeriaName: "Лополь3",
+      pizeriaName: "Truffaldino",
       imageSource: require("../images/3PizeriaImage.png"),
+      imageUnderImageSource: require("../images/downRingImage.png"),
     },
     {
-      pizeriaName: "Лополь4",
+      pizeriaName: "Syrovarnia Lviv",
       imageSource: require("../images/4PizeriaImage.png"),
+      imageUnderImageSource: require("../images/downRingImage.png"),
     },
     {
-      pizeriaName: "Лополь5",
+      pizeriaName: "Леополі",
       imageSource: require("../images/1PizeriaImage.png"),
+      imageUnderImageSource: require("../images/downRingImage.png"),
     },
   ]);
   return (
@@ -67,9 +76,12 @@ const PizaMenuScreen = () => {
             <FlatList
               data={arrayOfPizerias}
               renderItem={({ item }) => (
-                <BlockPizeria
+                <MenuBlock
+                  typeOfMenu={"Піцерія"}
                   imageSource={item.imageSource}
                   pizeriaName={item.pizeriaName}
+                  imageUnderImageSource={item.imageUnderImageSource}
+                  styleImageUnderImage={{ alignSelf: "center", top: -25 }}
                 />
               )}
             />
@@ -79,17 +91,17 @@ const PizaMenuScreen = () => {
 
         <View style={LocalStyle.bottomMenu}>
           <BottomMenu
-            imageSource={require("../../../../../images/locationIcon.png")}
+            imageSource={require("../../../../../../images/locationIcon.png")}
           />
           <BottomMenu
-            imageSource={require("../../../../../images/nonPressedRestaurantMenuIcon.png")}
+            imageSource={require("../../../../../../images/nonPressedRestaurantMenuIcon.png")}
             whereToNavigate="menuScreen"
           />
           <BottomMenu
-            imageSource={require("../../../../../images/shopIcon.png")}
+            imageSource={require("../../../../../../images/shopIcon.png")}
           />
           <BottomMenu
-            imageSource={require("../../../../../images/settingsIcon.png")}
+            imageSource={require("../../../../../../images/settingsIcon.png")}
           />
         </View>
       </SafeAreaView>

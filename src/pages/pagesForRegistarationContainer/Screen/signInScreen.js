@@ -13,7 +13,7 @@ import LocalScreenStyles from "../styles/LocalScreenStyles";
 import { useNavigation } from "@react-navigation/native";
 import setUserData from "../../../model/setUserData";
 
-const SingInScreen = ({}) => {
+const SignInScreen = ({}) => {
   const navigation = useNavigation();
 
   const [username, setUsername] = useState("");
@@ -52,7 +52,6 @@ const SingInScreen = ({}) => {
       setBadPasswordImageVisible(false);
     }
     if (everythingRight) {
-      setUserData(username, email, password);
       fetch("https://example.com", {
         method: "POST",
         body: JSON.stringify({ email, password, username }),
@@ -67,6 +66,7 @@ const SingInScreen = ({}) => {
         .then((data) => {
           if (data.success) {
             console.log("Registration successful");
+            setUserData(username, email, password);
             navigation.navigate("menuScreenContainer");
             setBadEmailTextVisible(false);
           } else {
@@ -308,4 +308,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SingInScreen;
+export default SignInScreen;
