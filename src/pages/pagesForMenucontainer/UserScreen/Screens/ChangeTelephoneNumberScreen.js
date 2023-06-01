@@ -93,8 +93,8 @@ const ChangeTelephoneNumberScreen = () => {
               value={number}
               placeholder="Ваш номер телефону?"
               maxLength={10}
-              keyboardType="numeric"
-              onChangeText={onChangeNumber} // Use onChangeText instead of onChange
+              keyboardType="phone-pad"
+              onChangeText={onChangeNumber}
             />
           </View>
           <Text

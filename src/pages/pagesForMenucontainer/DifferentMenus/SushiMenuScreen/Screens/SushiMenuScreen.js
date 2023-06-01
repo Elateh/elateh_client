@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useFonts } from "expo-font";
 import {
   View,
@@ -9,18 +9,22 @@ import {
   Text,
   FlatList,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
 import LocalStyle from "../../../styles/LocalStyle";
 import BottomMenu from "../../../models/BottomMenu";
 import SearchInput from "../../../models/SearchInput";
 import MenuBlock from "../../../../../model/MenuBlock";
+import { NotificationContext } from "../../../models/NotificationBuyIcon";
 
 const SushiMenuScreen = () => {
-  const [fontsLoaded] = useFonts({
+  const { isNotificationVisible, toggleNotification } =
+    useContext(NotificationContext);
+
+  const [] = useFonts({
     "MarckScript-Regular": require("../../../../../../assets/fonts/MarckScript-Regular.ttf"),
   });
+
   const [arrayOfPizerias, setArrayOfPizerias] = useState([
     {
       pizeriaName: "NOA",
@@ -46,6 +50,7 @@ const SushiMenuScreen = () => {
       pizeriaName: "Mamenori",
       imageSource: require("../images/1SushiImage.png"),
       imageUnderImageSource: require("../images/downRingImage.png"),
+      adress: "/Mamenori",
     },
   ]);
   return (
@@ -58,7 +63,12 @@ const SushiMenuScreen = () => {
             <View style={styles.headView}>
               <Image
                 source={require("../images/sideImage.png")}
-                style={{ transform: [{ rotateY: "180deg" }] }}
+                style={{
+                  marginLeft: 30,
+                  width: 83,
+                  height: 83,
+                  transform: [{ rotateY: "180deg" }],
+                }}
               />
               <View
                 style={{
@@ -70,7 +80,10 @@ const SushiMenuScreen = () => {
                 <Text style={styles.headText}>Суші</Text>
               </View>
 
-              <Image source={require("../images/sideImage.png")} />
+              <Image
+                source={require("../images/sideImage.png")}
+                style={{ marginRight: 30, width: 83, height: 83 }}
+              />
             </View>
             <FlatList
               data={arrayOfPizerias}
@@ -103,6 +116,7 @@ const SushiMenuScreen = () => {
           />
           <BottomMenu
             imageSource={require("../../../../../../images/shopIcon.png")}
+            hasNotification={isNotificationVisible}
           />
           <BottomMenu
             imageSource={require("../../../../../../images/settingsIcon.png")}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useFonts } from "expo-font";
 import {
   View,
@@ -9,16 +9,19 @@ import {
   Text,
   FlatList,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
 import LocalStyle from "../../../styles/LocalStyle";
 import BottomMenu from "../../../models/BottomMenu";
 import SearchInput from "../../../models/SearchInput";
 import MenuBlock from "../../../../../model/MenuBlock";
+import { NotificationContext } from "../../../models/NotificationBuyIcon";
 
 const FirstDishesMenuScreen = () => {
-  const [fontsLoaded] = useFonts({
+  const { isNotificationVisible, toggleNotification } =
+    useContext(NotificationContext);
+
+  const [] = useFonts({
     "MarckScript-Regular": require("../../../../../../assets/fonts/MarckScript-Regular.ttf"),
   });
   const [arrayOfPizerias, setArrayOfPizerias] = useState([
@@ -58,7 +61,7 @@ const FirstDishesMenuScreen = () => {
             <View style={styles.headView}>
               <Image
                 source={require("../images/bowlImage.png")}
-                style={{ marginLeft: 30 }}
+                style={{ marginLeft: 30, width: 83, height: 83 }}
               />
               <View
                 style={{
@@ -72,7 +75,7 @@ const FirstDishesMenuScreen = () => {
 
               <Image
                 source={require("../images/hotSoupImage.png")}
-                style={{ marginRight: 30 }}
+                style={{ marginRight: 30, width: 83, height: 83 }}
               />
             </View>
             <FlatList
@@ -100,6 +103,7 @@ const FirstDishesMenuScreen = () => {
           />
           <BottomMenu
             imageSource={require("../../../../../../images/shopIcon.png")}
+            hasNotification={isNotificationVisible}
           />
           <BottomMenu
             imageSource={require("../../../../../../images/settingsIcon.png")}

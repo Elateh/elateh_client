@@ -6,6 +6,7 @@ import ChangePasswordScreen from "../Screens/ChangePasswordScreen";
 import ChangePayScreen from "../Screens/ChangePayScreen";
 import ChangeTelephoneNumberScreen from "../Screens/ChangeTelephoneNumberScreen";
 import ConfidentialScreen from "../Screens/ConfidentialScreen";
+import AddNewPaYScreen from "../Screens/AddNewPayScreen";
 
 const UserScreenContainer = () => {
   return (
@@ -26,6 +27,7 @@ const UserScreenContainer = () => {
         component={ChangeTelephoneNumberScreen}
       />
       <Stack.Screen name="confidentialScreen" component={ConfidentialScreen} />
+      <Stack.Screen name="addNewPaYScreen" component={AddNewPaYScreen} />
     </Stack.Navigator>
   );
 };

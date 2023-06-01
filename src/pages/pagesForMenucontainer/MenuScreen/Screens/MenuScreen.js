@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -9,19 +9,17 @@ import {
 import GlobalStyle from "../../../../GlobalStyles/GlobalStyle";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useNavigation } from "@react-navigation/native";
 import LocalStyle from "../../styles/LocalStyle";
 
 import RightSideOfMenuBlock from "../models/RightSideMenuBlock";
 import LeftSideOfMenuBlock from "../models/LeftSideMenuBlock";
 import BottomMenu from "../../models/BottomMenu";
 import SearchInput from "../../models/SearchInput";
+import { NotificationContext } from "../../models/NotificationBuyIcon";
 
 const MenuScreen = () => {
-  const navigation = useNavigation();
-  const navigateSomeWhere = (whereToNavigate) => {
-    navigation.navigate(whereToNavigate);
-  };
+  const { isNotificationVisible, setNotificationVisible } =
+    useContext(NotificationContext);
 
   useEffect(() => {
     const backAction = () => {
@@ -83,22 +81,22 @@ const MenuScreen = () => {
             <LeftSideOfMenuBlock
               text={"Фастфуд"}
               imageSource={require("../../../../../images/FastFoodImage.png")}
-              whereToNavigate={"pizaMenuScreenContainer"}
+              whereToNavigate={"fastFoodMenuScreenContainer"}
             />
             <RightSideOfMenuBlock
               text={"Випічка"}
               imageSource={require("../../../../../images/BackeryImage.png")}
-              whereToNavigate={"pizaMenuScreenContainer"}
+              whereToNavigate={"backeryMenuScreenContainer"}
             />
             <LeftSideOfMenuBlock
               text={"Напої"}
               imageSource={require("../../../../../images/SodaImage.png")}
-              whereToNavigate={"pizaMenuScreenContainer"}
+              whereToNavigate={"drinkMenuScreenContainer"}
             />
             <RightSideOfMenuBlock
               text={"Ласощі"}
               imageSource={require("../../../../../images/CandiesImage.png")}
-              whereToNavigate={"pizaMenuScreenContainer"}
+              whereToNavigate={"candyMenuScreenContainer"}
             />
             <View style={{ height: 90 }}></View>
           </View>
@@ -114,6 +112,7 @@ const MenuScreen = () => {
           />
           <BottomMenu
             imageSource={require("../../../../../images/shopIcon.png")}
+            hasNotification={isNotificationVisible}
           />
           <BottomMenu
             imageSource={require("../../../../../images/settingsIcon.png")}

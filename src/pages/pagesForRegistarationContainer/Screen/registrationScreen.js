@@ -84,7 +84,7 @@ const RegistrationScreen = () => {
         </View>
         <TouchableOpacity
           style={styles.buttonInMainiCircle}
-          onPress={() => navigateSomeWhere("singInScreen")}
+          onPress={() => navigateSomeWhere("signInScreen")}
         >
           <Text style={styles.textInButton}>Зареєструватись</Text>
         </TouchableOpacity>

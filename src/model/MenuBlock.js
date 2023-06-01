@@ -9,7 +9,6 @@ const BlockPizeria = ({
   pizeriaName = "піца",
   imageUnderImageSource,
   styleImageUnderImage,
-  typeOfMenu,
 }) => {
   const navigation = useNavigation();
 
@@ -42,7 +41,6 @@ const BlockPizeria = ({
             width: 100,
           }}
         >
-          <Text style={styles.textUnunderImageBlock}>{typeOfMenu}</Text>
           <Text style={styles.textUnunderImageBlock}>{pizeriaName}</Text>
         </View>
       </View>

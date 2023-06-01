@@ -46,6 +46,9 @@ const ChangePayScreen = () => {
                 marginRight: 10,
                 marginLeft: "auto",
               }}
+              onPress={() => {
+                navigation.navigate("addNewPaYScreen");
+              }}
             >
               <Image
                 source={require("../../../../../images/downArrowIconBlack.png")}

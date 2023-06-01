@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
   Text,
   Image,
@@ -26,7 +25,7 @@ const LogInScreen = () => {
     if (!emailPattern.test(email)) {
       setBadPasswordTextVisible(true);
     } else {
-      fetch("http://127.0.0.1:5000/login-form", {
+      fetch("http://192.168.223.111:5000/api/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       })
@@ -38,7 +37,7 @@ const LogInScreen = () => {
           }
         })
         .then((data) => {
-          if (data != null) {
+          if (data.success) {
             console.log("Registration successful");
             setUserData(data.username, data.email, data.password);
             navigation.navigate("menuScreenContainer");
@@ -182,7 +181,7 @@ const LogInScreen = () => {
         </View>
         <TouchableOpacity
           style={LocalScreenStyles.buttonUnderCircle}
-          onPress={() => navigation.navigate("singInScreen")}
+          onPress={() => navigation.navigate("signInScreen")}
         >
           <Text style={LocalScreenStyles.textUnderCircle}>Зареєструватися</Text>
         </TouchableOpacity>
@@ -190,12 +189,4 @@ const LogInScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  shadow: {
-    borderRadius: 200,
-    flex: 1,
-  },
-});
-
 export default LogInScreen;

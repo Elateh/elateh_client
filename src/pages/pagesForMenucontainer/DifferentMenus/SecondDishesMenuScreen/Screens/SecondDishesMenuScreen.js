@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useFonts } from "expo-font";
 import {
   View,
@@ -9,16 +9,19 @@ import {
   Text,
   FlatList,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
 import LocalStyle from "../../../styles/LocalStyle";
 import BottomMenu from "../../../models/BottomMenu";
 import SearchInput from "../../../models/SearchInput";
 import MenuBlock from "../../../../../model/MenuBlock";
+import { NotificationContext } from "../../../models/NotificationBuyIcon";
 
 const SecondDishesMenuScreen = () => {
-  const [fontsLoaded] = useFonts({
+  const { isNotificationVisible, toggleNotification } =
+    useContext(NotificationContext);
+
+  const [] = useFonts({
     "MarckScript-Regular": require("../../../../../../assets/fonts/MarckScript-Regular.ttf"),
   });
   const [arrayOfPizerias, setArrayOfPizerias] = useState([
@@ -58,7 +61,7 @@ const SecondDishesMenuScreen = () => {
             <View style={styles.headView}>
               <Image
                 source={require("../images/spaghettiImage.png")}
-                style={{ marginLeft: 30 }}
+                style={{ marginLeft: 30, width: 83, height: 83 }}
               />
               <View
                 style={{
@@ -72,7 +75,7 @@ const SecondDishesMenuScreen = () => {
 
               <Image
                 source={require("../images/saladImage.png")}
-                style={{ marginRight: 30 }}
+                style={{ marginRight: 30, width: 83, height: 83 }}
               />
             </View>
             <FlatList
@@ -105,6 +108,7 @@ const SecondDishesMenuScreen = () => {
           />
           <BottomMenu
             imageSource={require("../../../../../../images/shopIcon.png")}
+            hasNotification={isNotificationVisible}
           />
           <BottomMenu
             imageSource={require("../../../../../../images/settingsIcon.png")}

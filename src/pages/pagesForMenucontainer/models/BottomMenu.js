@@ -6,6 +6,7 @@ const BottomMenu = ({
   imageSource,
   isPressed,
   whereToNavigate = "menuScreen",
+  hasNotification = false,
 }) => {
   const navigation = useNavigation();
 
@@ -38,6 +39,7 @@ const BottomMenu = ({
               alignSelf: "center",
             }}
           />
+          {hasNotification && <View style={styles.notification}></View>}
         </TouchableOpacity>
       </View>
     );
@@ -58,6 +60,15 @@ const styles = StyleSheet.create({
   bottomViewIcon: {
     flex: 1,
     justifyContent: "center",
+  },
+  notification: {
+    height: 15,
+    width: 15,
+    borderRadius: 1000,
+    backgroundColor: "#ff3e3e",
+    position: "absolute",
+    marginTop: 24,
+    left: 58,
   },
 });
 

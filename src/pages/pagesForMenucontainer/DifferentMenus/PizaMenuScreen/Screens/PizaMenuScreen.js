@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useFonts } from "expo-font";
 import {
   View,
@@ -9,18 +9,22 @@ import {
   Text,
   FlatList,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
 import LocalStyle from "../../../styles/LocalStyle";
 import BottomMenu from "../../../models/BottomMenu";
 import SearchInput from "../../../models/SearchInput";
 import MenuBlock from "../../../../../model/MenuBlock";
+import { NotificationContext } from "../../../models/NotificationBuyIcon";
 
 const PizaMenuScreen = () => {
-  const [fontsLoaded] = useFonts({
+  const { isNotificationVisible, toggleNotification } =
+    useContext(NotificationContext);
+
+  const [] = useFonts({
     "MarckScript-Regular": require("../../../../../../assets/fonts/MarckScript-Regular.ttf"),
   });
+
   const [arrayOfPizerias, setArrayOfPizerias] = useState([
     {
       pizeriaName: "Леополі",
@@ -57,10 +61,12 @@ const PizaMenuScreen = () => {
       <SafeAreaView style={[GlobalStyle.safeView, { flex: 1 }]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <SearchInput />
-
           <View style={{ marginTop: 40 }}>
             <View style={styles.headView}>
-              <Image source={require("../images/leftRingImage.png")} />
+              <Image
+                source={require("../images/leftRingImage.png")}
+                style={{ width: 83, height: 83 }}
+              />
               <View
                 style={{
                   justifyContent: "center",
@@ -71,7 +77,10 @@ const PizaMenuScreen = () => {
                 <Text style={styles.headText}>Піца</Text>
               </View>
 
-              <Image source={require("../images/RightRingImage.png")} />
+              <Image
+                source={require("../images/RightRingImage.png")}
+                style={{ width: 83, height: 83 }}
+              />
             </View>
             <FlatList
               data={arrayOfPizerias}
@@ -99,6 +108,7 @@ const PizaMenuScreen = () => {
           />
           <BottomMenu
             imageSource={require("../../../../../../images/shopIcon.png")}
+            hasNotification={isNotificationVisible}
           />
           <BottomMenu
             imageSource={require("../../../../../../images/settingsIcon.png")}

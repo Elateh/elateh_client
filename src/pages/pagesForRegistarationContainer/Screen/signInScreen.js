@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
   Text,
   Image,
@@ -52,9 +51,9 @@ const SignInScreen = ({}) => {
       setBadPasswordImageVisible(false);
     }
     if (everythingRight) {
-      fetch("https://example.com", {
+      fetch("http://192.168.223.111:5000/api/authentification", {
         method: "POST",
-        body: JSON.stringify({ email, password, username }),
+        body: JSON.stringify({ email, username, password }),
       })
         .then((response) => {
           if (response.ok) {
@@ -288,24 +287,5 @@ const SignInScreen = ({}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    width: 254,
-    borderColor: "#000",
-    borderWidth: 2,
-    marginBottom: 16,
-    paddingHorizontal: 8,
-    borderRadius: 10,
-    alignSelf: "center",
-    position: "relative",
-    top: "5%",
-  },
-  shadow: {
-    borderRadius: 200,
-    flex: 1,
-  },
-});
 
 export default SignInScreen;

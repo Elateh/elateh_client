@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
   Text,
   Image,
@@ -90,24 +89,5 @@ const ForgotPasswordScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    width: 254,
-    borderColor: "#000",
-    borderWidth: 2,
-    marginBottom: 16,
-    paddingHorizontal: 8,
-    borderRadius: 10,
-    alignSelf: "center",
-    position: "relative",
-    top: "5%",
-  },
-  shadow: {
-    borderRadius: 200,
-    flex: 1,
-  },
-});
 
 export default ForgotPasswordScreen;
