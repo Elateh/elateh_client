@@ -11,6 +11,7 @@ import GlobalStyle from "../../../GlobalStyles/GlobalStyle";
 import LocalScreenStyles from "../styles/LocalScreenStyles";
 import { useNavigation } from "@react-navigation/native";
 import setUserData from "../../../model/setUserData";
+import IP from "../../../References/IP";
 
 const SignInScreen = ({}) => {
   const navigation = useNavigation();
@@ -51,7 +52,7 @@ const SignInScreen = ({}) => {
       setBadPasswordImageVisible(false);
     }
     if (everythingRight) {
-      fetch("http://192.168.223.111:5000/api/authentification", {
+      fetch(IP + "/api/authentification", {
         method: "POST",
         body: JSON.stringify({ email, username, password }),
       })

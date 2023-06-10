@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Image,
   SafeAreaView,
-  ScrollView,
   Text,
   FlatList,
 } from "react-native";
@@ -14,7 +13,7 @@ import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
 import LocalStyle from "../../../styles/LocalStyle";
 import BottomMenu from "../../../models/BottomMenu";
 import SearchInput from "../../../models/SearchInput";
-import MenuBlock from "../../../../../model/MenuBlock";
+import MenuBlock from "../../../models/MenuBlock";
 import { NotificationContext } from "../../../models/NotificationBuyIcon";
 
 const SecondDishesMenuScreen = () => {
@@ -51,53 +50,54 @@ const SecondDishesMenuScreen = () => {
       imageUnderImageSource: require("../images/downRingImage.png"),
     },
   ]);
+
   return (
     <View style={[GlobalStyle.backgroundOfPages]}>
       <SafeAreaView style={[GlobalStyle.safeView, { flex: 1 }]}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <SearchInput />
-
-          <View style={{ marginTop: 40 }}>
-            <View style={styles.headView}>
-              <Image
-                source={require("../images/spaghettiImage.png")}
-                style={{ marginLeft: 30, width: 83, height: 83 }}
-              />
-              <View
-                style={{
-                  justifyContent: "center",
-                  flex: 1,
-                  alignSelf: "center",
-                }}
-              >
-                <Text style={styles.headText}>Другі страви</Text>
+        <FlatList
+          data={arrayOfPizerias}
+          ListHeaderComponent={() => (
+            <React.Fragment>
+              <SearchInput />
+              <View style={{ marginTop: 40 }}>
+                <View style={styles.headView}>
+                  <Image
+                    source={require("../images/spaghettiImage.png")}
+                    style={{ marginLeft: 30, width: 83, height: 83 }}
+                  />
+                  <View
+                    style={{
+                      justifyContent: "center",
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text style={styles.headText}>Другі страви</Text>
+                  </View>
+                  <Image
+                    source={require("../images/saladImage.png")}
+                    style={{ marginRight: 30, width: 83, height: 83 }}
+                  />
+                </View>
               </View>
-
-              <Image
-                source={require("../images/saladImage.png")}
-                style={{ marginRight: 30, width: 83, height: 83 }}
-              />
-            </View>
-            <FlatList
-              data={arrayOfPizerias}
-              renderItem={({ item }) => (
-                <MenuBlock
-                  imageSource={item.imageSource}
-                  pizeriaName={item.pizeriaName}
-                  imageUnderImageSource={item.imageUnderImageSource}
-                  styleImageUnderImage={{
-                    alignSelf: "center",
-                    top: -2,
-                    height: 138,
-                    width: 285,
-                  }}
-                />
-              )}
+            </React.Fragment>
+          )}
+          renderItem={({ item }) => (
+            <MenuBlock
+              imageSource={item.imageSource}
+              pizeriaName={item.pizeriaName}
+              imageUnderImageSource={item.imageUnderImageSource}
+              styleImageUnderImage={{
+                alignSelf: "center",
+                top: -2,
+                height: 138,
+                width: 285,
+              }}
             />
-            <View style={{ height: 90 }}></View>
-          </View>
-        </ScrollView>
-
+          )}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 90 }}
+        />
         <View style={LocalStyle.bottomMenu}>
           <BottomMenu
             imageSource={require("../../../../../../images/locationIcon.png")}
@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     alignSelf: "center",
   },
-
   linearGradient: {
     zIndex: 2,
     height: 165,

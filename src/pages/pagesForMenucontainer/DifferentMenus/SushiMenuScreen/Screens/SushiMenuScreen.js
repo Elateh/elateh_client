@@ -14,7 +14,7 @@ import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
 import LocalStyle from "../../../styles/LocalStyle";
 import BottomMenu from "../../../models/BottomMenu";
 import SearchInput from "../../../models/SearchInput";
-import MenuBlock from "../../../../../model/MenuBlock";
+import MenuBlock from "../../../models/MenuBlock";
 import { NotificationContext } from "../../../models/NotificationBuyIcon";
 
 const SushiMenuScreen = () => {
@@ -56,55 +56,59 @@ const SushiMenuScreen = () => {
   return (
     <View style={[GlobalStyle.backgroundOfPages]}>
       <SafeAreaView style={[GlobalStyle.safeView, { flex: 1 }]}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <SearchInput />
+        <FlatList
+          data={arrayOfPizerias}
+          ListHeaderComponent={() => (
+            <React.Fragment>
+              <SearchInput />
 
-          <View style={{ marginTop: 40 }}>
-            <View style={styles.headView}>
-              <Image
-                source={require("../images/sideImage.png")}
-                style={{
-                  marginLeft: 30,
-                  width: 83,
-                  height: 83,
-                  transform: [{ rotateY: "180deg" }],
-                }}
-              />
-              <View
-                style={{
-                  justifyContent: "center",
-                  flex: 1,
-                  alignSelf: "center",
-                }}
-              >
-                <Text style={styles.headText}>Суші</Text>
+              <View style={{ marginTop: 40 }}>
+                <View style={styles.headView}>
+                  <Image
+                    source={require("../images/sideImage.png")}
+                    style={{
+                      marginLeft: 30,
+                      width: 83,
+                      height: 83,
+                      transform: [{ rotateY: "180deg" }],
+                    }}
+                  />
+                  <View
+                    style={{
+                      justifyContent: "center",
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text style={styles.headText}>Суші</Text>
+                  </View>
+
+                  <Image
+                    source={require("../images/sideImage.png")}
+                    style={{ marginRight: 30, width: 83, height: 83 }}
+                  />
+                </View>
               </View>
-
-              <Image
-                source={require("../images/sideImage.png")}
-                style={{ marginRight: 30, width: 83, height: 83 }}
-              />
-            </View>
-            <FlatList
-              data={arrayOfPizerias}
-              renderItem={({ item }) => (
-                <MenuBlock
-                  typeOfMenu={"Суші"}
-                  imageSource={item.imageSource}
-                  pizeriaName={item.pizeriaName}
-                  imageUnderImageSource={item.imageUnderImageSource}
-                  styleImageUnderImage={{
-                    alignSelf: "center",
-                    top: -2,
-                    height: 108,
-                    width: 200,
-                  }}
-                />
-              )}
+            </React.Fragment>
+          )}
+          renderItem={({ item }) => (
+            <MenuBlock
+              typeOfMenu={"Суші"}
+              imageSource={item.imageSource}
+              pizeriaName={item.pizeriaName}
+              imageUnderImageSource={item.imageUnderImageSource}
+              styleImageUnderImage={{
+                alignSelf: "center",
+                top: -2,
+                height: 108,
+                width: 200,
+              }}
             />
-            <View style={{ height: 90 }}></View>
-          </View>
-        </ScrollView>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 40 }}
+        />
 
         <View style={LocalStyle.bottomMenu}>
           <BottomMenu

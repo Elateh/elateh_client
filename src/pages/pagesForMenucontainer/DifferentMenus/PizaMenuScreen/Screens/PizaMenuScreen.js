@@ -14,7 +14,7 @@ import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
 import LocalStyle from "../../../styles/LocalStyle";
 import BottomMenu from "../../../models/BottomMenu";
 import SearchInput from "../../../models/SearchInput";
-import MenuBlock from "../../../../../model/MenuBlock";
+import MenuBlock from "../../../models/MenuBlock";
 import { NotificationContext } from "../../../models/NotificationBuyIcon";
 
 const PizaMenuScreen = () => {
@@ -59,44 +59,49 @@ const PizaMenuScreen = () => {
   return (
     <View style={[GlobalStyle.backgroundOfPages]}>
       <SafeAreaView style={[GlobalStyle.safeView, { flex: 1 }]}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <SearchInput />
-          <View style={{ marginTop: 40 }}>
-            <View style={styles.headView}>
-              <Image
-                source={require("../images/leftRingImage.png")}
-                style={{ width: 83, height: 83 }}
-              />
-              <View
-                style={{
-                  justifyContent: "center",
-                  flex: 1,
-                  alignSelf: "center",
-                }}
-              >
-                <Text style={styles.headText}>Піца</Text>
-              </View>
+        <FlatList
+          data={arrayOfPizerias}
+          ListHeaderComponent={() => (
+            <React.Fragment>
+              <SearchInput />
 
-              <Image
-                source={require("../images/RightRingImage.png")}
-                style={{ width: 83, height: 83 }}
-              />
-            </View>
-            <FlatList
-              data={arrayOfPizerias}
-              renderItem={({ item }) => (
-                <MenuBlock
-                  typeOfMenu={"Піцерія"}
-                  imageSource={item.imageSource}
-                  pizeriaName={item.pizeriaName}
-                  imageUnderImageSource={item.imageUnderImageSource}
-                  styleImageUnderImage={{ alignSelf: "center", top: -25 }}
-                />
-              )}
+              <View style={{ marginTop: 40 }}>
+                <View style={styles.headView}>
+                  <Image
+                    source={require("../images/leftRingImage.png")}
+                    style={{ width: 83, height: 83 }}
+                  />
+                  <View
+                    style={{
+                      justifyContent: "center",
+                      flex: 1,
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Text style={styles.headText}>Піца</Text>
+                  </View>
+
+                  <Image
+                    source={require("../images/RightRingImage.png")}
+                    style={{ width: 83, height: 83 }}
+                  />
+                </View>
+              </View>
+            </React.Fragment>
+          )}
+          renderItem={({ item }) => (
+            <MenuBlock
+              typeOfMenu={"Піцерія"}
+              imageSource={item.imageSource}
+              pizeriaName={item.pizeriaName}
+              imageUnderImageSource={item.imageUnderImageSource}
+              styleImageUnderImage={{ alignSelf: "center", top: -25 }}
             />
-            <View style={{ height: 90 }}></View>
-          </View>
-        </ScrollView>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 40 }}
+        />
 
         <View style={LocalStyle.bottomMenu}>
           <BottomMenu

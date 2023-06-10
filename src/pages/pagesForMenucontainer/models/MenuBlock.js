@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const BlockPizeria = ({
+const MenuBlock = ({
   imageSource,
   whereToNavigate = "menuScreen",
   pizeriaName = "піца",
@@ -23,7 +23,9 @@ const BlockPizeria = ({
           style={styles.navigationIcon}
           onPress={() => navigation.navigate(whereToNavigate)}
         >
-          <Image source={require("../../images/downArrowIconLight.png")} />
+          <Image
+            source={require("../../../../images/downArrowIconLight.png")}
+          />
         </TouchableOpacity>
         <LinearGradient
           colors={["rgba(0,0,0,0)", "rgba(0,0,0,0.6)"]}
@@ -83,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BlockPizeria;
+export default MenuBlock;

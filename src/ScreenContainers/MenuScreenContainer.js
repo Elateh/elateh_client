@@ -3,6 +3,7 @@ import React from "react";
 const Stack = createStackNavigator();
 import MenuScreen from "../pages/pagesForMenucontainer/MenuScreen/Screens/MenuScreen";
 import UserScreenContainer from "../pages/pagesForMenucontainer/UserScreen/containers/UserScreenContainer";
+import CartScreenContainer from "../pages/pagesForMenucontainer/CartScreen/container/CartScreenContainer";
 import PizaMenuScreenContainer from "../pages/pagesForMenucontainer/DifferentMenus/PizaMenuScreen/containers/PizaMenuContainer";
 import SushiMenuScreenContainer from "../pages/pagesForMenucontainer/DifferentMenus/SushiMenuScreen/containers/SushiMenuScreenContainer";
 import FirstDishesScreenContainer from "../pages/pagesForMenucontainer/DifferentMenus/FirstDishesMenuScreen/containers/FirstDishesMenuContainer";
@@ -26,6 +27,10 @@ const MenuScreenContainer = () => {
         <Stack.Screen
           name="userScreenContainer"
           component={UserScreenContainer}
+        />
+        <Stack.Screen
+          name="cartScreenContainer"
+          component={CartScreenContainer}
         />
         <Stack.Screen
           name="pizaMenuScreenContainer"
