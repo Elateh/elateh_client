@@ -10,11 +10,10 @@ import {
 } from "react-native";
 
 import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
-import LocalStyle from "../../../styles/LocalStyle";
-import BottomMenu from "../../../models/BottomMenu";
 import SearchInput from "../../../models/SearchInput";
 import MenuBlock from "../../../models/MenuBlock";
 import { NotificationContext } from "../../../models/NotificationBuyIcon";
+import FullBottomMenu from "../../../models/FullBottomMenu";
 
 const FastFoodMenuScreen = () => {
   const { isNotificationVisible, toggleNotification } =
@@ -111,22 +110,7 @@ const FastFoodMenuScreen = () => {
           contentContainerStyle={{ paddingBottom: 90 }}
         />
 
-        <View style={LocalStyle.bottomMenu}>
-          <BottomMenu
-            imageSource={require("../../../../../../images/locationIcon.png")}
-          />
-          <BottomMenu
-            imageSource={require("../../../../../../images/nonPressedRestaurantMenuIcon.png")}
-            whereToNavigate="menuScreen"
-          />
-          <BottomMenu
-            imageSource={require("../../../../../../images/shopIcon.png")}
-            hasNotification={isNotificationVisible}
-          />
-          <BottomMenu
-            imageSource={require("../../../../../../images/settingsIcon.png")}
-          />
-        </View>
+        <FullBottomMenu caseOfMenu={0} />
       </SafeAreaView>
     </View>
   );

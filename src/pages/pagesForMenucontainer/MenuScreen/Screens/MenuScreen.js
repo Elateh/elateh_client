@@ -16,6 +16,7 @@ import LeftSideOfMenuBlock from "../models/LeftSideMenuBlock";
 import BottomMenu from "../../models/BottomMenu";
 import SearchInput from "../../models/SearchInput";
 import { NotificationContext } from "../../models/NotificationBuyIcon";
+import FullBottomMenu from "../../models/FullBottomMenu";
 
 const MenuScreen = () => {
   const { isNotificationVisible, setNotificationVisible } =
@@ -102,22 +103,7 @@ const MenuScreen = () => {
           </View>
         </ScrollView>
 
-        <View style={LocalStyle.bottomMenu}>
-          <BottomMenu
-            imageSource={require("../../../../../images/locationIcon.png")}
-          />
-          <BottomMenu
-            isPressed={true}
-            imageSource={require("../../../../../images/PressedRestaurantMenuIcon.png")}
-          />
-          <BottomMenu
-            imageSource={require("../../../../../images/shopIcon.png")}
-            hasNotification={isNotificationVisible}
-          />
-          <BottomMenu
-            imageSource={require("../../../../../images/settingsIcon.png")}
-          />
-        </View>
+        <FullBottomMenu caseOfMenu={2} />
       </SafeAreaView>
     </View>
   );
