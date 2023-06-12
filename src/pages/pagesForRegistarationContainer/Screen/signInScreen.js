@@ -52,7 +52,7 @@ const SignInScreen = ({}) => {
       setBadPasswordImageVisible(false);
     }
     if (everythingRight) {
-      fetch(IP + "/api/authentification", {
+      fetch(IP + "/api/auth/sign-up", {
         method: "POST",
         body: JSON.stringify({ email, username, password }),
       })

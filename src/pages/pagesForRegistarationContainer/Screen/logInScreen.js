@@ -26,7 +26,7 @@ const LogInScreen = () => {
     if (!emailPattern.test(email)) {
       setBadPasswordTextVisible(true);
     } else {
-      fetch(IP + "/api/login", {
+      fetch(IP + "/api/auth/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       })

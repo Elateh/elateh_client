@@ -1,8 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const MyComponent = () => {
+export const useOrders = () => {
   const [orders, setOrders] = useState([]);
   const [id, setId] = useState(0);
+
+  useEffect(() => {
+    // Retrieve orders from AsyncStorage
+    const retrieveOrders = async () => {
+      try {
+        const storedOrders = await AsyncStorage.getItem("orders");
+        if (storedOrders !== null) {
+          setOrders(JSON.parse(storedOrders));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    retrieveOrders();
+  }, []);
+
+  useEffect(() => {
+    const saveOrders = async () => {
+      try {
+        await AsyncStorage.setItem("orders", JSON.stringify(orders));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    saveOrders();
+  }, [orders]);
 
   const addNewOrder = (image, text, price) => {
     setOrders((prevOrders) => [
@@ -10,6 +39,7 @@ const MyComponent = () => {
       { id, image, text, price, quantity: 1 },
     ]);
     setId((prevId) => prevId + 1);
+    console.log(orders);
   };
 
   const removeOrder = (orderId) => {
@@ -37,6 +67,12 @@ const MyComponent = () => {
       )
     );
   };
-};
 
-export default MyComponent;
+  return {
+    orders,
+    addNewOrder,
+    removeOrder,
+    addExistingOrder,
+    removeExistingOrder,
+  };
+};
