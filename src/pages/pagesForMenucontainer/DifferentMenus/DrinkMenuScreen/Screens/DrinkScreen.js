@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useFonts } from "expo-font";
 import {
   View,
@@ -14,48 +14,48 @@ import SearchInput from "../../../models/SearchInput";
 import MenuBlock from "../../../models/MenuBlock";
 import { NotificationContext } from "../../../models/NotificationBuyIcon";
 import FullBottomMenu from "../../../models/FullBottomMenu";
+import IP from "../../../../../References/IP";
 
 const DrinkMenuScreen = () => {
   const { isNotificationVisible, toggleNotification } =
     useContext(NotificationContext);
 
-  const [] = useFonts({
+  const [arrayOfDrinkShops, setArrayOfDrinkShops] = useState([]);
+
+  const fetchDrinkShops = () => {
+    fetch(IP + "/api/cafe", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("все пришло");
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then((data) => {
+        setArrayOfDrinkShops(data);
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error);
+        throw error;
+      });
+  };
+
+  useEffect(() => {
+    fetchDrinkShops();
+  }, []);
+
+  useFonts({
     "MarckScript-Regular": require("../../../../../../assets/fonts/MarckScript-Regular.ttf"),
   });
-  const [arrayOfPizerias, setArrayOfPizerias] = useState([
-    {
-      pizeriaName: "7heaven",
-      imageSource: require("../images/1DrinkImage.png"),
-      imageUnderImageSource: require("../images/downRingImage.png"),
-    },
-    {
-      pizeriaName: "Вероніка",
-      imageSource: require("../images/2DrinkImage.png"),
-      imageUnderImageSource: require("../images/downRingImage.png"),
-    },
-    {
-      pizeriaName: "Фішка",
-      imageSource: require("../images/3DrinkImage.png"),
-      imageUnderImageSource: require("../images/downRingImage.png"),
-    },
-    {
-      pizeriaName: `   Піцерія 
-“Domino’s”`,
-      imageSource: require("../images/4DrinkImage.png"),
-      imageUnderImageSource: require("../images/downRingImage.png"),
-    },
-    {
-      pizeriaName: "7heaven",
-      imageSource: require("../images/1DrinkImage.png"),
-      imageUnderImageSource: require("../images/downRingImage.png"),
-    },
-  ]);
 
   return (
     <View style={[GlobalStyle.backgroundOfPages]}>
       <SafeAreaView style={[GlobalStyle.safeView, { flex: 1 }]}>
         <FlatList
-          data={arrayOfPizerias}
+          data={arrayOfDrinkShops}
           ListHeaderComponent={() => (
             <React.Fragment>
               <SearchInput />
@@ -97,8 +97,8 @@ const DrinkMenuScreen = () => {
           )}
           renderItem={({ item }) => (
             <MenuBlock
-              imageSource={item.imageSource}
-              pizeriaName={item.pizeriaName}
+              imageSource={item.picture}
+              pizeriaName={item.name}
               imageUnderImageSource={item.imageUnderImageSource}
               styleImageUnderImage={{
                 alignSelf: "center",
@@ -108,7 +108,6 @@ const DrinkMenuScreen = () => {
               }}
             />
           )}
-          keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 90 }}
         />

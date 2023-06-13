@@ -11,11 +11,39 @@ import {
 import SearchInput from "../../models/SearchInput";
 import GlobalStyle from "../../../../GlobalStyles/GlobalStyle";
 import FullBottomMenu from "../../models/FullBottomMenu";
+import IP from "../../../../References/IP";
 import { useOrders } from "../models/Orders";
 
 const Cart = () => {
-  const { addNewOrder, orders, removeExistingOrder, addExistingOrder } =
-    useOrders();
+  const {
+    addNewOrder,
+    orders,
+    removeExistingOrder,
+    addExistingOrder,
+    removeOrder,
+  } = useOrders();
+
+  const testPost = () => {
+    fetch(IP + "/api/cafe", {
+      method: "POST",
+      body: JSON.stringify({
+        name: "7sevenheaven",
+        picture: require("../../DifferentMenus/DrinkMenuScreen/images/firstCafe.png"),
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("все отправилось");
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error);
+        throw error;
+      });
+  };
 
   const sumOfPrices = () => {
     let sum = 0;
@@ -49,12 +77,13 @@ const Cart = () => {
             <Text style={styles.headText}>Корзина</Text>
           </View>
           <TouchableOpacity
-            onPress={() =>
-              addNewOrder(
-                require("../images/FirstImage.png"),
-                "Ход-дог молочний",
-                80
-              )
+            onPress={
+              () => testPost()
+              // addNewOrder(
+              //   require("../images/FirstImage.png"),
+              //   "Ход-дог молочний",
+              //   80
+              // )
             }
             style={[styles.headButton, { borderColor: "blue", borderWidth: 1 }]}
           />
@@ -73,6 +102,7 @@ const Cart = () => {
         <View style={{ height: 400 }}>
           <FlatList
             data={orders}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.orderBlock}>
                 <Image
@@ -101,7 +131,8 @@ const Cart = () => {
                       <Image source={require("../images/DeleteIcon.png")} />
                     </TouchableOpacity>
                   ) : (
-                    <View
+                    <TouchableOpacity
+                      onPress={() => removeOrder(item.id)}
                       style={{
                         marginLeft: 30,
                         alignSelf: "center",
@@ -109,7 +140,7 @@ const Cart = () => {
                       }}
                     >
                       <Image source={require("../images/DeleteIcon.png")} />
-                    </View>
+                    </TouchableOpacity>
                   )}
                   <View
                     style={{

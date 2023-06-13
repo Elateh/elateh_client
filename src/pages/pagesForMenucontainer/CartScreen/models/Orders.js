@@ -6,7 +6,6 @@ export const useOrders = () => {
   const [id, setId] = useState(0);
 
   useEffect(() => {
-    // Retrieve orders from AsyncStorage
     const retrieveOrders = async () => {
       try {
         const storedOrders = await AsyncStorage.getItem("orders");
