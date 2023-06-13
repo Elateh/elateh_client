@@ -1,7 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-const Stack = createStackNavigator();
 import DrinkMenuScreen from "../Screens/DrinkScreen";
+import DishesScreen from "../Screens/DishesScreen";
+
+const Stack = createStackNavigator();
 
 const DrinkMenuScreenContainer = () => {
   return (

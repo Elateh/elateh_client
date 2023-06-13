@@ -12,6 +12,7 @@ import FastFoodMenuScreenContainer from "../pages/pagesForMenucontainer/Differen
 import BackeryMenuScreenContainer from "../pages/pagesForMenucontainer/DifferentMenus/BackeryMenuScreen/Screens/BackeryMenuScreen";
 import DrinkMenuScreenContainer from "../pages/pagesForMenucontainer/DifferentMenus/DrinkMenuScreen/Screens/DrinkScreen";
 import CandyMenuScreenContainer from "../pages/pagesForMenucontainer/DifferentMenus/CandysMenuScreen/containers/CandyMenuContainer";
+import Dishes from "../pages/pagesForMenucontainer/DifferentMenus/Dishes";
 import { NotificationProvider } from "../pages/pagesForMenucontainer/models/NotificationBuyIcon";
 
 const MenuScreenContainer = () => {
@@ -64,6 +65,7 @@ const MenuScreenContainer = () => {
           name="candyMenuScreenContainer"
           component={CandyMenuScreenContainer}
         />
+        <Stack.Screen name="dishes" component={Dishes} />
       </Stack.Navigator>
     </NotificationProvider>
   );
