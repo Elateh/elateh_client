@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useFonts } from "expo-font";
-import { useNavigation } from "@react-navigation/native";
 import {
   View,
   StyleSheet,
@@ -99,7 +98,8 @@ const DrinkMenuScreen = () => {
           )}
           renderItem={({ item }) => (
             <MenuBlock
-              cafeID={item.id}
+              institutionID={item.id}
+              institutionName={item.name}
               imageSource={item.picture}
               pizeriaName={item.name}
               imageUnderImageSource={item.imageUnderImageSource}

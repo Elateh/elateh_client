@@ -13,37 +13,12 @@ import GlobalStyle from "../../../../GlobalStyles/GlobalStyle";
 import FullBottomMenu from "../../models/FullBottomMenu";
 import IP from "../../../../References/IP";
 import { useOrders } from "../models/Orders";
+import { useNavigation } from "@react-navigation/native";
 
 const Cart = () => {
-  const {
-    addNewOrder,
-    orders,
-    removeExistingOrder,
-    addExistingOrder,
-    removeOrder,
-  } = useOrders();
-
-  const testPost = () => {
-    fetch(IP + "/api/cafe", {
-      method: "POST",
-      body: JSON.stringify({
-        name: "7sevenheaven",
-        picture: require("../../DifferentMenus/DrinkMenuScreen/images/firstCafe.png"),
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("все отправилось");
-          return response.json();
-        } else {
-          throw new Error("Network response was not ok");
-        }
-      })
-      .catch((error) => {
-        console.error("Error occurred:", error);
-        throw error;
-      });
-  };
+  const { orders, removeExistingOrder, addExistingOrder, removeOrder } =
+    useOrders();
+  const navigation = useNavigation();
 
   const sumOfPrices = () => {
     let sum = 0;
@@ -58,7 +33,10 @@ const Cart = () => {
       <SafeAreaView style={[GlobalStyle.safeView, { flex: 1 }]}>
         <SearchInput />
         <View style={styles.headView}>
-          <TouchableOpacity style={styles.headButton}>
+          <TouchableOpacity
+            style={styles.headButton}
+            onPress={() => navigation.navigate("menuScreen")}
+          >
             <Image
               source={require("../../../../../images/downArrowIconBlack.png")}
               style={{
@@ -76,17 +54,7 @@ const Cart = () => {
           >
             <Text style={styles.headText}>Корзина</Text>
           </View>
-          <TouchableOpacity
-            onPress={
-              () => testPost()
-              // addNewOrder(
-              //   require("../images/FirstImage.png"),
-              //   "Ход-дог молочний",
-              //   80
-              // )
-            }
-            style={[styles.headButton, { borderColor: "blue", borderWidth: 1 }]}
-          />
+          <View style={styles.headButton} />
         </View>
         <View style={{ marginTop: 20 }} />
         <Text
@@ -132,7 +100,13 @@ const Cart = () => {
                     </TouchableOpacity>
                   ) : (
                     <TouchableOpacity
-                      onPress={() => removeOrder(item.id)}
+                      onPress={() =>
+                        removeOrder({
+                          orderId: item.id,
+                          orderTypeId: item.typeId,
+                          institutionID: item.institutionID,
+                        })
+                      }
                       style={{
                         marginLeft: 30,
                         alignSelf: "center",
@@ -162,7 +136,13 @@ const Cart = () => {
                     </View>
                   </View>
                   <TouchableOpacity
-                    onPress={() => addExistingOrder(item.id)}
+                    onPress={() =>
+                      addExistingOrder({
+                        orderId: item.id,
+                        orderTypeId: item.typeId,
+                        institutionID: item.institutionID,
+                      })
+                    }
                     style={{
                       marginRight: 30,
                       alignSelf: "center",

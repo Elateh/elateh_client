@@ -3,7 +3,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const useOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [id, setId] = useState(0);
 
   useEffect(() => {
     const retrieveOrders = async () => {
@@ -32,25 +31,44 @@ export const useOrders = () => {
     saveOrders();
   }, [orders]);
 
-  const addNewOrder = (image, text, price) => {
-    setOrders((prevOrders) => [
-      ...prevOrders,
-      { id, image, text, price, quantity: 1 },
-    ]);
-    setId((prevId) => prevId + 1);
-    console.log(orders);
+  const addNewOrder = (item) => {
+    const orderExists = orders.find(
+      (order) =>
+        order.id === item.id &&
+        order.typeId === item.typeId &&
+        order.institutionID === item.institutionID
+    );
+
+    if (!orderExists) {
+      setOrders((prevOrders) => [
+        ...prevOrders,
+        {
+          id: item.id,
+          institutionID: item.institutionID,
+          typeId: item.typeId,
+          image: item.picture,
+          text: item.name,
+          price: item.price,
+          quantity: 1,
+        },
+      ]);
+    }
   };
 
-  const removeOrder = (orderId) => {
+  const removeOrder = ({ orderId }) => {
+    console.log(orders);
+    console.log("-----" + orderId);
     setOrders((prevOrders) =>
       prevOrders.filter((order) => order.id !== orderId)
     );
   };
 
-  const addExistingOrder = (orderId) => {
+  const addExistingOrder = ({ orderId, orderTypeId, institutionID }) => {
     setOrders((prevOrders) =>
       prevOrders.map((order) =>
-        order.id === orderId
+        order.id === orderId &&
+        order.typeId === orderTypeId &&
+        order.institutionID === institutionID
           ? { ...order, quantity: order.quantity + 1 }
           : order
       )
@@ -75,3 +93,5 @@ export const useOrders = () => {
     removeExistingOrder,
   };
 };
+
+//даю orders и order получаю boolean
