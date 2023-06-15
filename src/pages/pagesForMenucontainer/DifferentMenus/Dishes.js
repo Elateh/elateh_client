@@ -25,7 +25,7 @@ const Dishes = ({ route }) => {
   const [downArrowRoateDegrees, setDownArrowRoateDegrees] = useState("90deg");
   const [isOpenModul, setModul] = useState(false);
   const navigation = useNavigation();
-  const { addNewOrder, orders } = useOrders();
+  const { orders, addFetch } = useOrders();
 
   const fetchDish = () => {
     fetch(`${IP}/api/cafe/${institutionID}/dishes`, {
@@ -41,13 +41,21 @@ const Dishes = ({ route }) => {
       .then((data) => {
         const updatedDishes = data.map((dish) => ({
           ...dish,
-          isChoosen: false,
+          isChosen: false,
+          quantity: 1,
         }));
+        updatedDishes.forEach((dish) => {
+          orders.forEach((order) => {
+            if (
+              order.id === dish.id &&
+              order.typeId === dish.typeId &&
+              order.institutionID === dish.institutionID
+            ) {
+              dish.isChosen = true;
+            }
+          });
+        });
         setAllDishes(updatedDishes);
-      })
-      .then(() => {
-        console.log(orders);
-        // checkForChoosenDishes();
       })
       .catch((error) => {
         console.error("Error occurred:", error);
@@ -96,10 +104,10 @@ const Dishes = ({ route }) => {
   };
 
   const onPressToChooseOrderByDish = (dish) => {
-    if (!dish.isChoosen) {
-      addNewOrder(dish);
+    if (!dish.isChosen) {
+      addFetch(dish);
     }
-    dish.isChoosen = !dish.isChoosen;
+    dish.isChosen = !dish.isChosen;
   };
 
   const onPressDownArrow = () => {
@@ -126,7 +134,6 @@ const Dishes = ({ route }) => {
     fetchData();
   }, []);
 
-  console.log(allDishes);
   return (
     <View style={[GlobalStyle.backgroundOfPages]}>
       <SafeAreaView style={[GlobalStyle.safeView, { flex: 1 }]}>
@@ -299,7 +306,7 @@ const Dishes = ({ route }) => {
                         </View>
                       </View>
                       <View style={[{ flex: 1, justifyContent: "center" }]}>
-                        {item.item.isChoosen ? (
+                        {item.item.isChosen ? (
                           <View style={{ width: 26, marginLeft: 5 }}>
                             <Image
                               source={require("../../../../images/choosenIcon.png")}

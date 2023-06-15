@@ -11,13 +11,11 @@ import {
 import SearchInput from "../../models/SearchInput";
 import GlobalStyle from "../../../../GlobalStyles/GlobalStyle";
 import FullBottomMenu from "../../models/FullBottomMenu";
-import IP from "../../../../References/IP";
 import { useOrders } from "../models/Orders";
 import { useNavigation } from "@react-navigation/native";
 
 const Cart = () => {
-  const { orders, removeExistingOrder, addExistingOrder, removeOrder } =
-    useOrders();
+  const { orders, addFetch, removeFetch } = useOrders();
   const navigation = useNavigation();
 
   const sumOfPrices = () => {
@@ -70,7 +68,6 @@ const Cart = () => {
         <View style={{ height: 400 }}>
           <FlatList
             data={orders}
-            keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View style={styles.orderBlock}>
                 <Image
@@ -81,7 +78,7 @@ const Cart = () => {
                   <Text
                     style={[styles.upperBlockText, { flex: 1, marginLeft: 25 }]}
                   >
-                    {item.text}
+                    {item.name}
                   </Text>
                   <Text style={[styles.upperBlockText, { marginRight: 25 }]}>
                     {item.price} грн
@@ -90,7 +87,7 @@ const Cart = () => {
                 <View style={[styles.lowerBlock, { flex: 1 }]}>
                   {item.quantity > 1 ? (
                     <TouchableOpacity
-                      onPress={() => removeExistingOrder(item.id)}
+                      onPress={() => removeFetch(item)}
                       style={{
                         marginLeft: 30,
                         alignSelf: "center",
@@ -100,13 +97,7 @@ const Cart = () => {
                     </TouchableOpacity>
                   ) : (
                     <TouchableOpacity
-                      onPress={() =>
-                        removeOrder({
-                          orderId: item.id,
-                          orderTypeId: item.typeId,
-                          institutionID: item.institutionID,
-                        })
-                      }
+                      onPress={() => removeFetch(item)}
                       style={{
                         marginLeft: 30,
                         alignSelf: "center",
@@ -136,13 +127,7 @@ const Cart = () => {
                     </View>
                   </View>
                   <TouchableOpacity
-                    onPress={() =>
-                      addExistingOrder({
-                        orderId: item.id,
-                        orderTypeId: item.typeId,
-                        institutionID: item.institutionID,
-                      })
-                    }
+                    onPress={() => addFetch(item)}
                     style={{
                       marginRight: 30,
                       alignSelf: "center",
