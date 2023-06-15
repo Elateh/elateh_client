@@ -7,7 +7,6 @@ const MenuBlock = ({
   institutionID,
   institutionName,
   imageSource,
-  pizeriaName = "піца",
   imageUnderImageSource,
   styleImageUnderImage,
 }) => {
@@ -49,7 +48,7 @@ const MenuBlock = ({
             width: 100,
           }}
         >
-          <Text style={styles.textUnunderImageBlock}>{pizeriaName}</Text>
+          <Text style={styles.textUnunderImageBlock}>{institutionName}</Text>
         </View>
       </View>
     </View>

@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   Text,
   FlatList,
-  TouchableOpacity,
 } from "react-native";
 
 import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
@@ -100,9 +99,9 @@ const DrinkMenuScreen = () => {
             <MenuBlock
               institutionID={item.id}
               institutionName={item.name}
-              imageSource={item.picture}
-              pizeriaName={item.name}
-              imageUnderImageSource={item.imageUnderImageSource}
+              // imageSource={require("../../../../../../imagesOnServer/fishka_dishes/" +
+              // item.picture)}
+              imageUnderImageSource={require("../images/downRingImage.png")}
               styleImageUnderImage={{
                 alignSelf: "center",
                 top: 0,

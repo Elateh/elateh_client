@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   SafeAreaView,
@@ -13,10 +13,22 @@ import GlobalStyle from "../../../../GlobalStyles/GlobalStyle";
 import FullBottomMenu from "../../models/FullBottomMenu";
 import { useOrders } from "../models/Orders";
 import { useNavigation } from "@react-navigation/native";
+import { NotificationContext } from "../../models/NotificationBuyIcon";
 
 const Cart = () => {
+  const { removeNotificationOrder, addNotificationOrder } =
+    useContext(NotificationContext);
   const { orders, addFetch, removeFetch } = useOrders();
   const navigation = useNavigation();
+  const onPressToAdd = (item) => {
+    addNotificationOrder();
+    addFetch(item);
+  };
+
+  const onPressToRemove = (item) => {
+    removeNotificationOrder();
+    removeFetch(item);
+  };
 
   const sumOfPrices = () => {
     let sum = 0;
@@ -85,28 +97,16 @@ const Cart = () => {
                   </Text>
                 </View>
                 <View style={[styles.lowerBlock, { flex: 1 }]}>
-                  {item.quantity > 1 ? (
-                    <TouchableOpacity
-                      onPress={() => removeFetch(item)}
-                      style={{
-                        marginLeft: 30,
-                        alignSelf: "center",
-                      }}
-                    >
-                      <Image source={require("../images/DeleteIcon.png")} />
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity
-                      onPress={() => removeFetch(item)}
-                      style={{
-                        marginLeft: 30,
-                        alignSelf: "center",
-                        opacity: 0.6,
-                      }}
-                    >
-                      <Image source={require("../images/DeleteIcon.png")} />
-                    </TouchableOpacity>
-                  )}
+                  <TouchableOpacity
+                    onPress={() => onPressToRemove(item)}
+                    style={{
+                      marginLeft: 30,
+                      alignSelf: "center",
+                      opacity: 0.6,
+                    }}
+                  >
+                    <Image source={require("../images/DeleteIcon.png")} />
+                  </TouchableOpacity>
                   <View
                     style={{
                       flex: 1,
@@ -127,7 +127,7 @@ const Cart = () => {
                     </View>
                   </View>
                   <TouchableOpacity
-                    onPress={() => addFetch(item)}
+                    onPress={() => onPressToAdd(item)}
                     style={{
                       marginRight: 30,
                       alignSelf: "center",

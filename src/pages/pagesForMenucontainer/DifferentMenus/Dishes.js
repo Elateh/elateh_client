@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -15,8 +15,10 @@ import SearchInput from "../models/SearchInput";
 import FullBottomMenu from "../models/FullBottomMenu";
 import { useNavigation } from "@react-navigation/native";
 import { useOrders } from "../CartScreen/models/Orders";
+import { NotificationContext } from "../models/NotificationBuyIcon";
 
 const Dishes = ({ route }) => {
+  const { addNotificationOrder } = useContext(NotificationContext);
   const institutionID = route.params.institutionID;
   const institutionName = route.params.institutionName;
   const [allTypes, setAllTypes] = useState();
@@ -106,6 +108,7 @@ const Dishes = ({ route }) => {
   const onPressToChooseOrderByDish = (dish) => {
     if (!dish.isChosen) {
       addFetch(dish);
+      addNotificationOrder();
     }
     dish.isChosen = !dish.isChosen;
   };
@@ -133,6 +136,23 @@ const Dishes = ({ route }) => {
 
     fetchData();
   }, []);
+
+  const imagePaths = {
+    1: require("../../../../imagesOnServer/fishka_dishes/1Image.png"),
+    2: require("../../../../imagesOnServer/fishka_dishes/2Image.png"),
+    3: require("../../../../imagesOnServer/fishka_dishes/3Image.png"),
+    4: require("../../../../imagesOnServer/fishka_dishes/4Image.png"),
+    5: require("../../../../imagesOnServer/fishka_dishes/5Image.png"),
+    6: require("../../../../imagesOnServer/fishka_dishes/6Image.png"),
+    7: require("../../../../imagesOnServer/fishka_dishes/7Image.png"),
+    8: require("../../../../imagesOnServer/fishka_dishes/8Image.png"),
+    9: require("../../../../imagesOnServer/fishka_dishes/9Image.png"),
+    10: require("../../../../imagesOnServer/fishka_dishes/10Image.png"),
+    11: require("../../../../imagesOnServer/fishka_dishes/11Image.png"),
+    12: require("../../../../imagesOnServer/fishka_dishes/12Image.png"),
+    13: require("../../../../imagesOnServer/fishka_dishes/13Image.png"),
+    14: require("../../../../imagesOnServer/fishka_dishes/14Image.png"),
+  };
 
   return (
     <View style={[GlobalStyle.backgroundOfPages]}>
@@ -246,7 +266,7 @@ const Dishes = ({ route }) => {
             </View>
           )}
         </View>
-        <View style={{ zIndex: 1 }}>
+        <View style={{ zIndex: 1, height: 600 }}>
           <FlatList
             data={getAllDishesByTypeId(typeIdNow)}
             renderItem={(item) => (
@@ -262,7 +282,9 @@ const Dishes = ({ route }) => {
                     },
                   ]}
                 >
-                  <View style={[styles.leftViewOfOrder]}></View>
+                  <View style={[styles.leftViewOfOrder]}>
+                    <Image source={imagePaths[item.item.picture]} />
+                  </View>
                   <View style={[styles.rightViewOfOrder]}>
                     <View style={[styles.upperViewOfRightViewOfOrder]}>
                       <Text
