@@ -4,9 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const MenuBlock = ({
-  cafeID,
+  institutionID,
+  institutionName,
   imageSource,
-  pizeriaName = "піца",
   imageUnderImageSource,
   styleImageUnderImage,
 }) => {
@@ -16,7 +16,12 @@ const MenuBlock = ({
     <View style={styles.blockPizeria}>
       <TouchableOpacity
         style={{ zIndex: 2 }}
-        onPress={() => navigation.navigate("dishes", { cafeID: cafeID })}
+        onPress={() =>
+          navigation.navigate("dishes", {
+            institutionID: institutionID,
+            institutionName: institutionName,
+          })
+        }
       >
         <Image
           source={imageSource}
@@ -43,7 +48,7 @@ const MenuBlock = ({
             width: 100,
           }}
         >
-          <Text style={styles.textUnunderImageBlock}>{pizeriaName}</Text>
+          <Text style={styles.textUnunderImageBlock}>{institutionName}</Text>
         </View>
       </View>
     </View>

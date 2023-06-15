@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import IP from "../../../../References/IP";
 
 export const useOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [id, setId] = useState(0);
 
   useEffect(() => {
     const retrieveOrders = async () => {
@@ -32,29 +32,61 @@ export const useOrders = () => {
     saveOrders();
   }, [orders]);
 
-  const addNewOrder = (image, text, price) => {
-    setOrders((prevOrders) => [
-      ...prevOrders,
-      { id, image, text, price, quantity: 1 },
-    ]);
-    setId((prevId) => prevId + 1);
-    console.log(orders);
+  const addFetch = (order) => {
+    fetch(IP + "/api/order/add_order", {
+      method: "POST",
+      body: JSON.stringify({ orders, order }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then((data) => {
+        setOrders(data.orders);
+      });
   };
 
-  const removeOrder = (orderId) => {
+  const removeFetch = (order) => {
+    fetch(IP + "/api/order/remove_order", {
+      method: "POST",
+      body: JSON.stringify({ orders, order }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then((data) => {
+        setOrders(data.orders);
+      });
+  };
+
+  const addNewOrder = (item) => {
+    const orderExists = orders.find(
+      (order) =>
+        order.id === item.id &&
+        order.typeId === item.typeId &&
+        order.institutionID === item.institutionID
+    );
+
+    if (!orderExists) {
+      setOrders((prevOrders) => [...prevOrders, item]);
+    }
+  };
+
+  const removeOrder = ({ orderId }) => {
     setOrders((prevOrders) =>
       prevOrders.filter((order) => order.id !== orderId)
     );
   };
 
-  const addExistingOrder = (orderId) => {
-    setOrders((prevOrders) =>
-      prevOrders.map((order) =>
-        order.id === orderId
-          ? { ...order, quantity: order.quantity + 1 }
-          : order
-      )
-    );
+  const addExistingOrder = (order) => {
+    addFetch(order);
   };
 
   const removeExistingOrder = (orderId) => {
@@ -73,5 +105,7 @@ export const useOrders = () => {
     removeOrder,
     addExistingOrder,
     removeExistingOrder,
+    addFetch,
+    removeFetch,
   };
 };

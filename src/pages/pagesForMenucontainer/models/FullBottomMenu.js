@@ -85,6 +85,7 @@ export default FullBottomMenu = ({ caseOfMenu }) => {
           <BottomMenu
             isPressed={true}
             imageSource={require("../../../../images/PressedShopIcon.png")}
+            hasNotification={isNotificationVisible}
           />
           <BottomMenu
             imageSource={require("../../../../images/NonPressedSettingsIcon.png")}

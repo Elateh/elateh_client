@@ -14,11 +14,11 @@ export const NotificationProvider = ({ children }) => {
     }
   }, [numberOfOrders]);
 
-  const addOrder = () => {
+  const addNotificationOrder = () => {
     setNumberOfOrders((prevCount) => prevCount + 1);
   };
 
-  const removeOrder = () => {
+  const removeNotificationOrder = () => {
     if (numberOfOrders !== 0) {
       setNumberOfOrders((prevCount) => prevCount - 1);
     }
@@ -33,8 +33,8 @@ export const NotificationProvider = ({ children }) => {
       value={{
         isNotificationVisible,
         toggleNotification,
-        addOrder,
-        removeOrder,
+        addNotificationOrder,
+        removeNotificationOrder,
       }}
     >
       {children}

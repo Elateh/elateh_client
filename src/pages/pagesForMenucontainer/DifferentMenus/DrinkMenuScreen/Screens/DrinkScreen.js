@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useFonts } from "expo-font";
-import { useNavigation } from "@react-navigation/native";
 import {
   View,
   StyleSheet,
@@ -8,7 +7,6 @@ import {
   SafeAreaView,
   Text,
   FlatList,
-  TouchableOpacity,
 } from "react-native";
 
 import GlobalStyle from "../../../../../GlobalStyles/GlobalStyle";
@@ -99,10 +97,11 @@ const DrinkMenuScreen = () => {
           )}
           renderItem={({ item }) => (
             <MenuBlock
-              cafeID={item.id}
-              imageSource={item.picture}
-              pizeriaName={item.name}
-              imageUnderImageSource={item.imageUnderImageSource}
+              institutionID={item.id}
+              institutionName={item.name}
+              // imageSource={require("../../../../../../imagesOnServer/fishka_dishes/" +
+              // item.picture)}
+              imageUnderImageSource={require("../images/downRingImage.png")}
               styleImageUnderImage={{
                 alignSelf: "center",
                 top: 0,

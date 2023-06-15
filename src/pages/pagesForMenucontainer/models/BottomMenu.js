@@ -23,6 +23,7 @@ const BottomMenu = ({
               alignSelf: "center",
             }}
           />
+          {hasNotification && <View style={styles.notification}></View>}
         </View>
       </View>
     );
